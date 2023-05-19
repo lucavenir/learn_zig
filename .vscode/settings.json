@@ -1,0 +1,13 @@
+{
+  "zig.zigPath": "/snap/zig/current/zig",
+  "[zig]": {
+    "editor.tabSize": 4,
+    "editor.insertSpaces": true,
+    "editor.formatOnSave": true,
+    "editor.formatOnPaste": true,
+    "editor.codeActionsOnSave": {
+      "source.fixAll": true,
+      "source.organizeImports": true
+    }
+  },
+}
