@@ -19,13 +19,13 @@ fn function() AllocationError!u16 {
 }
 
 fn vectors() [5]u8 {
-    const b = [5]u8{ 'w', 'o', 'r', 'l', 'd' };
+    const b = [_]u8{ 'w', 'o', 'r', 'l', 'd' };
 
     return b;
 }
 
 fn slices() []const u8 {
-    const b = [5]u8{ 'w', 'o', 'r', 'l', 'd' };
+    const b = [_]u8{ 'w', 'o', 'r', 'l', 'd' };
 
     return b[0..4];
 }
