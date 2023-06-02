@@ -8,7 +8,7 @@ pub fn main() void {
     const anotherResult = vectors();
     std.debug.print("Here's a vector, I wonder how it prints out: {s}\n", .{anotherResult});
 
-    const yetAnotherResult = vectors();
+    const yetAnotherResult = slices();
     std.debug.print("Here's a slice, I wonder how it prints out: {s}\n", .{yetAnotherResult});
 }
 
@@ -22,7 +22,7 @@ fn vectors() [5]u8 {
     return b;
 }
 
-fn slices() []u8 {
+fn slices() []const u8 {
     const b = [5]u8{ 'w', 'o', 'r', 'l', 'd' };
 
     return b[0..2];
