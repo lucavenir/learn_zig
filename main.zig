@@ -1,4 +1,6 @@
 const std = @import("std");
+const expect = @import("std").testing.expect;
+
 const AllocationError = error{OutOfMemory};
 
 pub fn main() void {
@@ -25,5 +27,13 @@ fn vectors() [5]u8 {
 fn slices() []const u8 {
     const b = [5]u8{ 'w', 'o', 'r', 'l', 'd' };
 
-    return b[0..2];
+    return b[0..4];
+}
+
+test "test deez slice" {
+    const s = slices();
+    try expect(s.len == 4);
+
+    const a = s[0..2];
+    try (expect(a.len == 2));
 }
