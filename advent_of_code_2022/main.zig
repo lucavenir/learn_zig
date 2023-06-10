@@ -21,10 +21,21 @@ pub fn main() !void {
 
     print("Selected day: {}\n", .{arg});
 
-    const result = aoc.computeAocChallenge(arg) catch |err| {
-        print("{} This challenge hasn't been solved, yet\n", .{err});
-        return;
-    };
+    var gpa = std.heap.GeneralPurposeAllocator(.{ .safety = true }){};
+    defer _ = gpa.deinit();
+    const allocator = gpa.allocator();
 
-    print("Challenge Answer: {s}\n", .{result});
+    var result = aoc.computeAocChallenge(allocator, arg) catch |err| {
+        return switch (err) {
+            aoc.AocError.AocNotFound => {
+                print("{} This challenge hasn't been solved, yet\n", .{err});
+            },
+            else => {
+                print("{}\n", .{err});
+            },
+        };
+    };
+    defer result.deinit(allocator);
+
+    print("Challenge Answer: {s}\n", .{result.result});
 }
