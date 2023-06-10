@@ -29,9 +29,3 @@ test "reads a file" {
 
     try t.expectEqualStrings(contents, "this is a file.\n");
 }
-
-// // why not this?
-// // const gpa = std.heap.GeneralPurposeAllocator(.{ .safety = true });
-// var gpa = std.heap.GeneralPurposeAllocator(.{ .safety = true }){};
-// defer _ = gpa.deinit();
-// _ = gpa.allocator();
