@@ -7,10 +7,10 @@ const file_system = std.fs;
 const io = std.io;
 
 pub fn main() !void {
-    const arg = command_line.getFirstArg() catch |err| {
+    const day = command_line.getFirstArg() catch |err| {
         switch (err) {
             command_line.CliError.ArgumentNotFound => {
-                print("Usage: [x] (AoC day, integer)\n", .{});
+                print("Usage: zig run main.dart -- <AoC day, as integer>\n", .{});
             },
             command_line.CliError.InvalidInteger => {
                 print("Invalid AoC day\n", .{});
@@ -19,23 +19,22 @@ pub fn main() !void {
         return;
     };
 
-    print("Selected day: {}\n", .{arg});
+    print("Selected day: {}\n", .{day});
 
     var gpa = std.heap.GeneralPurposeAllocator(.{ .safety = true }){};
-    defer _ = gpa.deinit();
     const allocator = gpa.allocator();
 
-    var result = aoc.computeAocChallenge(allocator, arg) catch |err| {
+    var result = aoc.computeAocChallenge(allocator, day) catch |err| {
         return switch (err) {
             aoc.AocError.AocNotFound => {
                 print("{} This challenge hasn't been solved, yet\n", .{err});
             },
             else => {
-                print("{}\n", .{err});
+                print("Uh oh. {}\n", .{err});
             },
         };
     };
-    defer result.deinit(allocator);
 
-    print("Challenge Answer: {s}\n", .{result.result});
+    print("Challenge {d}.1. Answer: {s}\n", .{ day, result.first_star });
+    print("Challenge {d}.2. Answer: {s}\n", .{ day, result.second_star });
 }
