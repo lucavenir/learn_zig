@@ -1,5 +1,6 @@
 const std = @import("std");
 const fibonacci = @import("fibonacci.zig");
+const coins = @import("coins.zig");
 
 
 
@@ -9,8 +10,9 @@ pub fn main() !void {
     const arg = args.next();
     if(arg) |value| {
         const number = try std.fmt.parseUnsigned(u8, value, 10);
-        // const fibonacci = fibonacci.naiveFibonacci(number);
-        const f = try fibonacci.fibonacci(number);
-        std.debug.print("Fibonacci result: {}\n", .{f});
+        // const n = fibonacci.naiveFibonacci(number);
+        // const n = try fibonacci.fibonacci(number);
+        const n = try coins.coins(number);
+        std.debug.print("Result: {}\n", .{n});
     }
  }
