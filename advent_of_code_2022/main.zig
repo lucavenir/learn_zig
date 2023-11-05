@@ -1,7 +1,7 @@
 const std = @import("std");
 const print = std.debug.print;
 const command_line = @import("utilities/command_line.zig");
-const aoc = @import("compute_challenge.zig");
+const aoc1 = @import("aoc1.zig");
 const t = std.testing;
 const file_system = std.fs;
 const io = std.io;
@@ -21,12 +21,12 @@ pub fn main() !void {
 
     print("Selected day: {}\n", .{day});
 
-    var gpa = std.heap.GeneralPurposeAllocator(.{ .safety = true }){};
-    const allocator = gpa.allocator();
-
-    var result = aoc.computeAocChallenge(allocator, day) catch |err| {
+    const result = switch (day) {
+        1 => aoc1.aoc1(),
+        else => AocError.AocNotFound,
+    } catch |err| {
         return switch (err) {
-            aoc.AocError.AocNotFound => {
+            AocError.AocNotFound => {
                 print("{} This challenge hasn't been solved, yet\n", .{err});
             },
             else => {
@@ -35,6 +35,10 @@ pub fn main() !void {
         };
     };
 
-    print("Challenge {d}.1. Answer: {s}\n", .{ day, result.first_star });
-    print("Challenge {d}.2. Answer: {s}\n", .{ day, result.second_star });
+    print("Challenge {d}.1. Answer: {any}\n", .{ day, result.first_star });
+    print("Challenge {d}.2. Answer: {any}\n", .{ day, result.second_star });
 }
+
+pub const AocError = error{
+    AocNotFound,
+};

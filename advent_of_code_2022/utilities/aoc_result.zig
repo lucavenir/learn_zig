@@ -1,6 +1,8 @@
 const std = @import("std");
 
-pub const AocResult = struct {
-    first_star: []u8,
-    second_star: []u8,
-};
+pub fn AocResult(comptime T: type) type {
+    return struct {
+        first_star: T,
+        second_star: T,
+    };
+}
