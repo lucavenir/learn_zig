@@ -6,3 +6,7 @@ pub fn AocResult(comptime T: type) type {
         second_star: T,
     };
 }
+
+pub const AocError = error{
+    UnexpectedInput,
+};
