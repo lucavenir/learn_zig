@@ -3,6 +3,7 @@ const print = std.debug.print;
 const command_line = @import("utilities/command_line.zig");
 const aoc1 = @import("aoc1.zig");
 const aoc2 = @import("aoc2.zig");
+const aoc3 = @import("aoc3.zig");
 const t = std.testing;
 const file_system = std.fs;
 const io = std.io;
@@ -25,6 +26,7 @@ pub fn main() !void {
     const result = switch (day) {
         1 => aoc1.aoc1(),
         2 => aoc2.aoc2(),
+        3 => aoc3.aoc3(),
         else => AocError.AocNotFound,
     } catch |err| {
         return switch (err) {
